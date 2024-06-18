@@ -1,1 +1,33 @@
 GET http://localhost:3000/events
+
+###
+GET http://localhost:3000/events/{{ eventId }}
+
+###
+# @name createEvent
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+    "name": "TestDelete",
+    "description": "TestDelete",
+    "date": "2024-06-18T00:00:00",
+    "price": 20
+}
+
+###
+@eventId = {{ createEvent.response.body.id }}
+
+###
+PATCH http://localhost:3000/events/{{ eventId }}
+Content-Type: application/json
+
+{
+    "name": "São João",
+    "description": "Caruaru, the capital of Forro",
+    "date": "2024-06-18T00:00:00",
+    "price": 100
+}
+
+###
+DELETE http://localhost:3000/events/{{ eventId }}
