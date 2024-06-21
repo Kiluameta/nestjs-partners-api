@@ -1,5 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
-import { EventsService } from './events.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+} from '@nestjs/common';
+import { EventsService, ReservSpotInput } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 
@@ -31,5 +40,10 @@ export class EventsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.eventsService.remove(id);
+  }
+
+  @Post(':id/reserve')
+  reserveSpots(@Param('id') id: string, @Body() dto: ReservSpotInput) {
+    return this.eventsService.reserveSpot({ ...dto, eventId: id });
   }
 }

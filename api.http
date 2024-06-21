@@ -9,10 +9,10 @@ POST http://localhost:3000/events
 Content-Type: application/json
 
 {
-    "name": "TestDelete",
-    "description": "TestDelete",
-    "date": "2024-06-18T00:00:00",
-    "price": 20
+    "name": "São João",
+    "description": "Caruaru the capytal of Forro",
+    "date": "2025-06-18T00:00:00",
+    "price": 250
 }
 
 ###
@@ -42,4 +42,18 @@ Content-Type: application/json
 
 {
     "name": "IA"
+}
+
+###
+@spotName = {{ createSpot.response.body.name }}
+
+###
+# @name createReserve
+POST http://localhost:3000/events/{{ eventId }}/reserve
+Content-Type: application/json
+
+{
+    "spots": ["{{spotName}}"],
+    "ticket_kind": "full",
+    "email": "rogiborgessouza@outlook.com"
 }
