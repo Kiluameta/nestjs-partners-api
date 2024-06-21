@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ReserveSpotDto } from './dto/reserve-spot.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma, SpotStatus, TicketStatus } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 export type ReservSpotInput = ReserveSpotDto & { eventId: string };
 @Injectable()
