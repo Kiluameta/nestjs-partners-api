@@ -13,16 +13,16 @@ import {
   EventsService,
   ReservSpotInput,
 } from '@app/core/events/events.service';
-import { CreateEventRequest } from './request/create-event.request';
-import { UpdateEventRequest } from './request/update-event.request';
+import { CriarEventoRequest } from './request/criar-evento.request';
+import { AtualizarEventoRequest } from './request/atualizar-evento.request';
 import { AuthGuard } from '@app/core/auth/auth.guard';
 
-@Controller('events')
-export class EventsController {
+@Controller('eventos')
+export class EventosController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  create(@Body() createEventDto: CreateEventRequest) {
+  create(@Body() createEventDto: CriarEventoRequest) {
     return this.eventsService.create(createEventDto);
   }
 
@@ -37,7 +37,10 @@ export class EventsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventRequest) {
+  update(
+    @Param('id') id: string,
+    @Body() updateEventDto: AtualizarEventoRequest,
+  ) {
     return this.eventsService.update(id, updateEventDto);
   }
 
@@ -48,7 +51,7 @@ export class EventsController {
   }
 
   @UseGuards(AuthGuard)
-  @Post(':id/reserve')
+  @Post(':id/reservar')
   reserveSpots(@Param('id') id: string, @Body() dto: ReservSpotInput) {
     return this.eventsService.reserveSpot({ ...dto, eventId: id });
   }
